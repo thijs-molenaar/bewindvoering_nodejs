@@ -22,6 +22,7 @@
   },
   "dependencies": {
     "body-parser": "^1.18.2",
+    "bootstrap-datepicker-webpack": "^1.7.0-dev",
     "bootstrap-sass": "^3.3.7",
     "css-loader": "^0.28.7",
     "express": "^4.16.2",

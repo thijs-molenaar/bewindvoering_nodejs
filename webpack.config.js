@@ -2,9 +2,12 @@ const path = require('path');
 var webpack = require('webpack');
 
 module.exports = {
-  entry: './src/index.js',
+  entry: {
+    index: './src/index.js',
+    create_user: ['./src/index.js', './src/create_user.js']
+  },
   output: {
-    filename: 'bundle.js',
+    filename: '[name].bundle.js',
     path: path.resolve(__dirname, 'dist/js')
   },
   plugins: [
@@ -19,5 +22,11 @@ module.exports = {
     rules: [
       { test: /\.scss$/, loaders: [ 'style-loader', 'css-loader', 'sass-loader' ]}
   ]
+},
+resolve: {
+  alias: {
+      // Force all modules to use the same jquery version.
+      'jquery': path.join(__dirname, 'node_modules/jquery/src/jquery')
   }
+}
 };

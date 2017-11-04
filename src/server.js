@@ -9,10 +9,10 @@ app.use(bodyParser.json());
 app.use("/js", Express.static(path.resolve(__dirname + "/../dist/js")));
 
 var Storage = multer.diskStorage({
-    destination: function(req, file, callback) {
+    destination: (req, file, callback) => {
         callback(null, path.resolve(__dirname + "/../dist/uploads"));
     },
-    filename: function(req, file, callback) {
+    filename: (req, file, callback) => {
         callback(null, file.fieldname + "_" + Date.now() + "_" + file.originalname);
     }
 });
@@ -21,18 +21,22 @@ var upload = multer({
    storage: Storage
 }).array("imgUploader", 3); //Field name and max count
 
-app.get("/", function(req, res) {
+app.get("/", (req, res) => {
    res.sendFile( path.resolve(__dirname + "/../dist/index.html"));
    //res.redirect('index.html');
 });
 
-app.post("/api/Upload", function(req, res) {
-  upload(req, res, function(err) {
+app.get("/create_user", (req, res) => {
+   res.sendFile( path.resolve(__dirname + "/../dist/create_user.html"));
+});
+
+app.post("/api/Upload", (req, res) => {
+  upload(req, res, (err) => {
      if (err) {
        console.log(err);
        return res.end("Something went wrong!");
      }
-     return res.end("File uploaded sucessfully!.");
+     return res.end("File uploaded sucessfully.");
   });
 });
 
