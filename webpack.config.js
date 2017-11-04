@@ -12,7 +12,12 @@ module.exports = {
         $: 'jquery',
         jQuery: 'jquery',
         'window.jQuery': 'jquery',
-        Popper: ['popper.js', 'default']
+        Popper: ['popper.js', 'default'],
       })
+  ],
+  module: {
+    rules: [
+      { test: /\.scss$/, loaders: [ 'style-loader', 'css-loader', 'sass-loader' ]}
   ]
+  }
 };
