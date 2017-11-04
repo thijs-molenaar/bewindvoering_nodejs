@@ -10,7 +10,7 @@ app.use("/js", Express.static(path.resolve(__dirname + "/../dist/js")));
 
 var Storage = multer.diskStorage({
     destination: function(req, file, callback) {
-        callback(null, "/../dist/uploads");
+        callback(null, path.resolve(__dirname + "/../dist/uploads"));
     },
     filename: function(req, file, callback) {
         callback(null, file.fieldname + "_" + Date.now() + "_" + file.originalname);
@@ -18,21 +18,22 @@ var Storage = multer.diskStorage({
 });
 
 var upload = multer({
-     storage: Storage
- }).array("imgUploader", 3); //Field name and max count
+   storage: Storage
+}).array("imgUploader", 3); //Field name and max count
 
 app.get("/", function(req, res) {
-     res.sendFile( path.resolve(__dirname + "/../dist/index.html"));
-     //res.redirect('index.html');
- });
+   res.sendFile( path.resolve(__dirname + "/../dist/index.html"));
+   //res.redirect('index.html');
+});
 
- app.post("/api/Upload", function(req, res) {
-     upload(req, res, function(err) {
-         if (err) {
-             return res.end("Something went wrong!");
-         }
-         return res.end("File uploaded sucessfully!.");
-     });
- });
+app.post("/api/Upload", function(req, res) {
+  upload(req, res, function(err) {
+     if (err) {
+       console.log(err);
+       return res.end("Something went wrong!");
+     }
+     return res.end("File uploaded sucessfully!.");
+  });
+});
 
- app.listen(8080, () => console.log('Listening on port 8080'))
+app.listen(8080, () => console.log('Listening on port 8080'));
