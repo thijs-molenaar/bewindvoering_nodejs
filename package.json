@@ -1,0 +1,25 @@
+{
+  "name": "bewindvoering",
+  "version": "1.0.0",
+  "description": "bewindvoering in node",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://thijs-molenaar@github.com/thijs-molenaar/bewindvoering_nodejs.git"
+  },
+  "author": "Thijs Molenaar",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/thijs-molenaar/bewindvoering_nodejs/issues"
+  },
+  "homepage": "https://github.com/thijs-molenaar/bewindvoering_nodejs#readme",
+  "devDependencies": {
+    "webpack": "^3.8.1"
+  },
+  "dependencies": {
+    "bootstrap": "^3.3.7"
+  }
+}
