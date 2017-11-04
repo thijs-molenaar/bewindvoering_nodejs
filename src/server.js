@@ -1,4 +1,5 @@
 var http = require('http');
+import 'bootstrap';
 
 http.createServer( (req, res) => {
 
