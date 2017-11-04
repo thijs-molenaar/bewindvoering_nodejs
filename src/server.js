@@ -21,8 +21,30 @@ var upload = multer({
    storage: Storage
 }).array("imgUploader", 3); //Field name and max count
 
+function connectToMongo(){
+  var MongoClient = require('mongodb').MongoClient;
+  var url = "mongodb://localhost:27017/bewindvoering";
+
+  MongoClient.connect(url, (err, db) => {
+    if (err) throw err;
+    console.log("Database accessed!");
+    db.listCollections().toArray(function(err, collInfos) {
+    // collInfos is an array of collection info objects that look like:
+    // { name: 'test', options: {} }
+    console.log(collInfos);
+    });
+    db.collection("people").findOne({}, (err, result) => {
+      if (err) throw err;
+      console.log(result);
+      db.close();
+    });
+    db.close();
+  });
+}
+
 app.get("/", (req, res) => {
    res.sendFile( path.resolve(__dirname + "/../dist/index.html"));
+   connectToMongo();
    //res.redirect('index.html');
 });
 
