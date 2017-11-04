@@ -1,5 +1,5 @@
 var http = require('http');
-import 'bootstrap';
+var formidable = require('formidable');
 
 http.createServer( (req, res) => {
 
