@@ -28,15 +28,16 @@ function connectToMongo(){
   MongoClient.connect(url, (err, db) => {
     if (err) throw err;
     console.log("Database accessed!");
-    db.listCollections().toArray(function(err, collInfos) {
+    db.listCollections().toArray( (err, collInfos) => {
     // collInfos is an array of collection info objects that look like:
     // { name: 'test', options: {} }
     console.log(collInfos);
     });
-    db.collection("people").findOne({}, (err, result) => {
+    db.collection("people").find().toArray( (err, people) => {
       if (err) throw err;
-      console.log(result);
-      db.close();
+      people.forEach( (person) => {
+        console.log(person.firstname);
+      });
     });
     db.close();
   });
