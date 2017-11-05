@@ -5,6 +5,11 @@ var path = require('path');
 var app = Express();
 app.use(bodyParser.json());
 
+
+var dbhelper = require('./dbhelper.js');
+
+
+
 // serve js as static files
 app.use("/js", Express.static(path.resolve(__dirname + "/../dist/js")));
 
@@ -45,8 +50,43 @@ function connectToMongo(){
 
 app.get("/", (req, res) => {
    res.sendFile( path.resolve(__dirname + "/../dist/index.html"));
-   connectToMongo();
+   //connectToMongo();
    //res.redirect('index.html');
+});
+
+app.get("/test", (req, res) => {
+
+// to use await we need to be inside an async function
+(async () => {
+  let people = await dbhelper.getUsers();
+  console.log(await people);
+  res.write(await people[0].firstname);
+  res.end();
+})();
+
+// another way is to use a promise
+// dbhelper.retrieveUsers().then( (people) => {
+//   console.log(people);
+// });
+
+});
+
+app.get("/users", (req, res) => {
+  var MongoClient = require('mongodb').MongoClient;
+  var url = "mongodb://localhost:27017/bewindvoering";
+
+  MongoClient.connect(url, (err, db) => {
+    if (err) throw err;
+
+    db.collection("people").find().toArray( (err, people) => {
+      if (err) throw err;
+      people.forEach( (person) => {
+        res.write(person.firstname);
+      });
+      res.end();
+    });
+    db.close();
+  });
 });
 
 app.get("/create_user", (req, res) => {
