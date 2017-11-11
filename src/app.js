@@ -24,7 +24,19 @@ var Storage = multer.diskStorage({
 
 var upload = multer({
    storage: Storage
-}).array("imgUploader", 3); //Field name and max count
+}).single("imgUploader");
+
+app.post("/api/upload", (req, res) => {
+  upload(req, res, (err) => {
+     if (err) {
+       console.log(err);
+       return res.end("Something went wrong!");
+     }
+     console.log(req.file);
+     res.write(JSON.stringify({"result":"success", "file": req.file}));
+     return res.end();
+  });
+});
 
 function connectToMongo(){
   var MongoClient = require('mongodb').MongoClient;
@@ -91,16 +103,6 @@ app.get("/users", (req, res) => {
 
 app.get("/create_user", (req, res) => {
    res.sendFile( path.resolve(__dirname + "/../dist/create_user.html"));
-});
-
-app.post("/api/Upload", (req, res) => {
-  upload(req, res, (err) => {
-     if (err) {
-       console.log(err);
-       return res.end("Something went wrong!");
-     }
-     return res.end("File uploaded sucessfully.");
-  });
 });
 
 app.listen(8080, () => console.log('Listening on port 8080'));
