@@ -7,9 +7,25 @@ $('document').ready( () => {
   }
 
   $('#cropfinish').click( () => {
-    var res = $('#image_upload_preview').croppie('result')
+    var res = $('#image_upload_preview').croppie('result', 'blob')
     .then( (result) => {
-      console.log(result);
+      let data = new FormData();
+      data.append("imgUploader", result);
+
+      $.ajax({
+       type: "POST",
+       url: "/api/upload",
+       enctype: 'multipart/form-data',
+       data: data,
+       processData: false,  // otherwise jQuery will transform data into a string
+       contentType: false,
+       cache: false,
+       success: function(res) {
+        // parse response as JSON before doing anything with it
+        res = $.parseJSON(res);
+        showUploadResult(res);
+        }
+      });
     });
     console.log("aaa");
   });
