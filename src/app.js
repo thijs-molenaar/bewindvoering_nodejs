@@ -13,6 +13,9 @@ var dbhelper = require('./dbhelper.js');
 // serve js as static files
 app.use("/js", Express.static(path.resolve(__dirname + "/../dist/js")));
 
+// serve uploaded files as static files
+app.use("/uploads", Express.static(path.resolve(__dirname + "/../dist/uploads")));
+
 var Storage = multer.diskStorage({
     destination: (req, file, callback) => {
         callback(null, path.resolve(__dirname + "/../dist/uploads"));

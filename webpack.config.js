@@ -4,7 +4,7 @@ var webpack = require('webpack');
 module.exports = {
   entry: {
     index: './src/index.js',
-    create_user: ['./src/index.js', './src/create_user.js']
+    create_user: ['./src/index.js', './src/create_user.js', './node_modules/croppie/croppie.js']
   },
   output: {
     filename: '[name].bundle.js',
@@ -15,7 +15,7 @@ module.exports = {
         $: 'jquery',
         jQuery: 'jquery',
         'window.jQuery': 'jquery',
-        Popper: ['popper.js', 'default'],
+        Popper: ['popper.js', 'default']
       })
   ],
   module: {

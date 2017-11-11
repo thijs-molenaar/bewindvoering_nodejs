@@ -7,11 +7,16 @@
       <div class="row create-user">
         <div class="col-xs-12 col-sm-8 col-sm-offset-2">
           <h1 class="page-title">Gebruiker aanmaken</h1>
+          <img id="image_upload_preview" />
+          <button id="cropfinish" class="btn btn-default pull-right">finished</button>
+          <div class="uploadedImage hidden">
+
+          </div>
 
           <form id="upload">
             <div class="form-group">
               <h3>Afbeelding</h3>
-              <input type="file" name="imgUploader" multiple />
+              <input id="imgUploader" type="file" name="imgUploader" />
             </div>
             <div class="form-group">
               <input type="submit" class="btn btn-default pull-right" value="Upload" />

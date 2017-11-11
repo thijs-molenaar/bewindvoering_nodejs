@@ -24,6 +24,7 @@
     "body-parser": "^1.18.2",
     "bootstrap-datepicker-webpack": "^1.7.0-dev",
     "bootstrap-sass": "^3.3.7",
+    "croppie": "^2.5.1",
     "css-loader": "^0.28.7",
     "express": "^4.16.2",
     "jquery": "^3.2.1",
