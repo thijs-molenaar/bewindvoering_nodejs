@@ -10,11 +10,11 @@ $('document').ready( () => {
     var res = $('#image_upload_preview').croppie('result', 'blob')
     .then( (result) => {
       let data = new FormData();
-      data.append("imgUploader", result);
+      data.append("imgUploader", result); // server expects this name
 
       $.ajax({
        type: "POST",
-       url: "/api/upload",
+       url: "/api/upload/user/image",
        enctype: 'multipart/form-data',
        data: data,
        processData: false,  // otherwise jQuery will transform data into a string
@@ -75,7 +75,7 @@ $('document').ready( () => {
 
     $.ajax({
      type: "POST",
-     url: "/api/upload",
+     url: "/api/upload/user/image",
      enctype: 'multipart/form-data',
      data: data,
      processData: false,  // otherwise jQuery will transform data into a string

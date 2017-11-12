@@ -5,10 +5,7 @@ var path = require('path');
 var app = Express();
 app.use(bodyParser.json());
 
-
 var dbhelper = require('./dbhelper.js');
-
-
 
 // serve js as static files
 app.use("/js", Express.static(path.resolve(__dirname + "/../dist/js")));
@@ -25,15 +22,15 @@ var Storage = multer.diskStorage({
     }
 });
 
-var upload = multer({
+var uploadUserImage = multer({
    storage: Storage
 }).single("imgUploader");
 
-app.post("/api/upload", (req, res) => {
-  upload(req, res, (err) => {
+app.post("/api/upload/user/image", (req, res) => {
+  uploadUserImage(req, res, (err) => {
      if (err) {
        console.log(err);
-       return res.end("Something went wrong!");
+       return res.end(JSON.stringify({"result":"error"}));
      }
      console.log(req.file);
      res.write(JSON.stringify({"result":"success", "file": req.file}));
