@@ -7,23 +7,24 @@
       <div class="row create-user">
         <div class="col-xs-12 col-sm-8 col-sm-offset-2">
           <h1 class="page-title">Gebruiker aanmaken</h1>
-          <div class="image-preview">
+          <h3>Afbeelding</h3>
+            <div class="row choose-file">
+              <div class="col-xs-6">
+                <form id="uploadImage">
+                  <input id="imgUploader" type="file" name="imgUploader" />
+                </form>
+              </div>
+              <div class-"col-xs-6">
+                <button id="cropfinish" class="btn btn-default">Upload</button>
+              </div>
+            </div>
+          <div class="image-preview hidden">
             <img id="image_upload_preview" />
           </div>
-          <button id="cropfinish" class="btn btn-default pull-right">finished</button>
           <div class="uploadedImage hidden">
 
+            <button id="resetImage" class="btn btn-default">Kies andere afbeelding</button>
           </div>
-
-          <form id="upload">
-            <div class="form-group">
-              <h3>Afbeelding</h3>
-              <input id="imgUploader" type="file" name="imgUploader" />
-            </div>
-            <div class="form-group">
-              <input type="submit" class="btn btn-default pull-right" value="Upload" />
-            </div>
-          </form>
 
           <form id="create-user" class="create-user">
             <div class="form-group">

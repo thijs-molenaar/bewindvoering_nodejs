@@ -1,5 +1,12 @@
 $('document').ready( () => {
 
+  $('#resetImage').click( (e) => {
+    $('.choose-file').removeClass('hidden');
+    $('.user-image').remove();
+    $(e.currentTarget).addClass('hidden');
+    $('#uploadImage').get(0).reset();
+  });
+
   function setUpCroppie() {
     let croppie = $('#image_upload_preview').croppie({
       viewport: { width: 300, height: 300, type: 'circle' }
@@ -39,6 +46,7 @@ $('document').ready( () => {
           }
 
           reader.onloadend = (e) => {
+            $('.image-preview').removeClass('hidden');
             setUpCroppie();
           }
 
@@ -53,14 +61,15 @@ $('document').ready( () => {
   var showUploadResult = (result) => {
     if (result.result === "success") {
       // hide upload form
-      $('#upload').addClass('hidden');
+      $('.image-preview').addClass('hidden');
+        $('.choose-file').addClass('hidden');
 
       // create image element from just uploaded image
       const filePath = '/uploads/' + result.file.filename;
       let div = '<img src="' + filePath + '" class="user-image img-circle" />';
 
       // append image to uploadedImage div and unhide
-      $('.uploadedImage').append(div);
+      $('.uploadedImage').prepend(div);
       $('.uploadedImage').removeClass('hidden');
     }
     else {

@@ -2,6 +2,7 @@ var Express = require('express');
 var multer = require('multer');
 var bodyParser = require('body-parser');
 var path = require('path');
+var mime = require('mime-types')
 var app = Express();
 app.use(bodyParser.json());
 
@@ -18,7 +19,8 @@ var Storage = multer.diskStorage({
         callback(null, path.resolve(__dirname + "/../dist/uploads"));
     },
     filename: (req, file, callback) => {
-        callback(null, file.fieldname + "_" + Date.now() + "_" + file.originalname);
+        const extension = mime.extension(file.mimetype);
+        callback(null, file.fieldname + "_" + Date.now() + "_" + file.originalname + "." + extension);
     }
 });
 
